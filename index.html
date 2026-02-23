@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Admin Panel - Full Time Support</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -202,12 +202,39 @@
             margin-bottom: 5px;
         }
         
-        .input-group input {
+        .input-group input, .input-group select {
             width: 100%;
             padding: 12px;
             background: rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
+            color: white;
+        }
+        
+        .input-group select option {
+            background: #1a1a24;
+        }
+        
+        .time-presets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .preset-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 8px;
+            color: #9ca3af;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .preset-btn:hover {
+            background: #8b5cf6;
             color: white;
         }
         
@@ -264,6 +291,10 @@
             border-radius: 10px;
             margin-bottom: 10px;
             display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 3000;
         }
         
         .error-message {
@@ -273,6 +304,25 @@
             border-radius: 10px;
             margin-bottom: 10px;
             display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 3000;
+        }
+        
+        .info-text {
+            color: #9ca3af;
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
+        
+        .badge {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            margin-left: 8px;
         }
     </style>
 </head>
@@ -282,7 +332,7 @@
         <div class="header-top">
             <div class="logo">
                 <i class="fas fa-shield-halved"></i>
-                <span>Admin Panel</span>
+                <span>KeyMaster Pro</span>
             </div>
             <div style="display: flex; gap: 10px;">
                 <div class="icon-btn" onclick="loadData()">
@@ -340,10 +390,31 @@
                 <label>Key Name</label>
                 <input type="text" id="modal_keyName" placeholder="e.g. VIP-2024">
             </div>
+            
             <div class="input-group">
-                <label>Expiry</label>
-                <input type="text" id="modal_expiry" placeholder="lifetime or 2024-12-31">
+                <label>Expiry Time</label>
+                <input type="text" id="modal_expiry" placeholder="e.g. 30m, 12h, 7d, 1M, 1y, lifetime">
             </div>
+            
+            <div class="time-presets">
+                <div class="preset-btn" onclick="setExpiry('15m')">15m</div>
+                <div class="preset-btn" onclick="setExpiry('30m')">30m</div>
+                <div class="preset-btn" onclick="setExpiry('45m')">45m</div>
+                <div class="preset-btn" onclick="setExpiry('1h')">1h</div>
+                <div class="preset-btn" onclick="setExpiry('6h')">6h</div>
+                <div class="preset-btn" onclick="setExpiry('12h')">12h</div>
+                <div class="preset-btn" onclick="setExpiry('1d')">1d</div>
+                <div class="preset-btn" onclick="setExpiry('7d')">7d</div>
+                <div class="preset-btn" onclick="setExpiry('30d')">30d</div>
+                <div class="preset-btn" onclick="setExpiry('1M')">1M</div>
+                <div class="preset-btn" onclick="setExpiry('1y')">1y</div>
+                <div class="preset-btn" onclick="setExpiry('lifetime')">∞</div>
+            </div>
+            
+            <div class="info-text">
+                ⏱️ Format: 15m, 30m, 1h, 12h, 1d, 7d, 1M, 1y, 2025-12-31, lifetime
+            </div>
+            
             <div class="btn-row">
                 <button class="btn btn-secondary" onclick="closeModal('keyModal')">Cancel</button>
                 <button class="btn btn-primary" onclick="saveKey()">Save</button>
@@ -366,8 +437,8 @@
     <script>
         // ========== YOUR DETAILS - CHANGE THESE ==========
         const PROJECT = "BitaKura/admin-panel";  // Your username/repo
-        const TOKEN = "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";  // Your NEW token
-        const FILE = "data.json";  // Changed filename to avoid corruption
+        const TOKEN = "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";  // 
+        const FILE = "data.json";
         const BRANCH = "main";
         const API = `https://api.github.com/repos/${PROJECT}/contents/${FILE}`;
 
@@ -389,6 +460,95 @@
             }, 2000);
         }
 
+        function setExpiry(value) {
+            document.getElementById('modal_expiry').value = value;
+        }
+
+        // Function to check if a key is expired
+        function isKeyExpired(expiry) {
+            if (!expiry) return false;
+            if (expiry === 'lifetime') return false;
+            
+            // Check if it's a date (YYYY-MM-DD)
+            if (expiry.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                const expiryDate = new Date(expiry);
+                const today = new Date();
+                return expiryDate < today;
+            }
+            
+            // Check if it's duration (30m, 1h, 7d, etc)
+            const match = expiry.match(/^(\d+)([mhdwMy])$/);
+            if (match) {
+                const value = parseInt(match[1]);
+                const unit = match[2];
+                
+                // For duration keys, we don't know when they started
+                // So we consider them valid (they expire after activation)
+                return false;
+            }
+            
+            return false;
+        }
+
+        // Function to get status dot class
+        function getStatusClass(expiry) {
+            if (!expiry) return 'dot-valid';
+            if (expiry === 'lifetime') return 'dot-lifetime';
+            
+            // Check if it's a date
+            if (expiry.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                const expiryDate = new Date(expiry);
+                const today = new Date();
+                const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                
+                if (expiryDate < today) return 'dot-expired';
+                if (diffDays <= 3) return 'dot-warning';
+                return 'dot-valid';
+            }
+            
+            // Duration keys (30m, 1h, 7d, etc) - always show as valid
+            return 'dot-valid';
+        }
+
+        // Function to format expiry display
+        function formatExpiry(expiry) {
+            if (!expiry) return 'No expiry';
+            if (expiry === 'lifetime') return 'Lifetime';
+            
+            // If it's a date, show remaining time
+            if (expiry.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                const expiryDate = new Date(expiry);
+                const today = new Date();
+                const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                
+                if (expiryDate < today) return `${expiry} (Expired)`;
+                if (diffDays === 0) return `${expiry} (Today)`;
+                if (diffDays === 1) return `${expiry} (Tomorrow)`;
+                return `${expiry} (${diffDays} days left)`;
+            }
+            
+            // Duration format - add badge
+            const match = expiry.match(/^(\d+)([mhdwMy])$/);
+            if (match) {
+                const value = match[1];
+                const unit = match[2];
+                let unitName = '';
+                
+                switch(unit) {
+                    case 'm': unitName = 'minute'; break;
+                    case 'h': unitName = 'hour'; break;
+                    case 'd': unitName = 'day'; break;
+                    case 'w': unitName = 'week'; break;
+                    case 'M': unitName = 'month'; break;
+                    case 'y': unitName = 'year'; break;
+                }
+                
+                return `${value} ${unitName}${value > 1 ? 's' : ''}`;
+            }
+            
+            return expiry;
+        }
+
         async function loadData() {
             document.getElementById('loader').style.display = 'flex';
             try {
@@ -397,7 +557,6 @@
                 });
                 
                 if (response.status === 404) {
-                    // File doesn't exist - start fresh
                     globalData = { 
                         keys: {}, 
                         config: { 
@@ -416,17 +575,14 @@
                 
                 const data = await response.json();
                 
-                // Check if content exists
                 if (!data.content) {
                     throw new Error("No content in response");
                 }
                 
-                // Fix base64 decoding
                 let decoded;
                 try {
                     decoded = atob(data.content.replace(/\n/g, ''));
                 } catch (e) {
-                    // If decoding fails, start fresh
                     globalData = { keys: {}, config: { themeColor: "#8b5cf6", country: "Global" } };
                     renderAll();
                     document.getElementById('loader').style.display = 'none';
@@ -436,14 +592,12 @@
                 try {
                     globalData = JSON.parse(decoded);
                 } catch (e) {
-                    // If JSON is invalid, start fresh
                     globalData = { keys: {}, config: { themeColor: "#8b5cf6", country: "Global" } };
                 }
                 
                 renderAll();
             } catch (error) {
                 console.error("Load error:", error);
-                // Start with empty data on error
                 globalData = { keys: {}, config: { themeColor: "#8b5cf6", country: "Global" } };
                 renderAll();
             } finally {
@@ -452,14 +606,12 @@
         }
 
         async function saveAllData() {
-            // Update config from inputs
             globalData.config.themeColor = document.getElementById('cfg_themeColor').value;
             globalData.config.country = document.getElementById('cfg_country').value;
 
             document.getElementById('loader').style.display = 'flex';
             
             try {
-                // Get current file SHA if exists
                 let sha = null;
                 try {
                     const checkResponse = await fetch(`${API}?ref=${BRANCH}`, {
@@ -469,11 +621,8 @@
                         const data = await checkResponse.json();
                         sha = data.sha;
                     }
-                } catch (e) {
-                    // File doesn't exist, continue without SHA
-                }
+                } catch (e) {}
 
-                // Convert to base64 properly
                 const jsonString = JSON.stringify(globalData, null, 2);
                 const content = btoa(unescape(encodeURIComponent(jsonString)));
                 
@@ -524,20 +673,24 @@
             }
 
             keys.forEach(key => {
-                const value = globalData.keys[key];
-                const expiry = value;
+                const expiry = globalData.keys[key];
+                const statusClass = getStatusClass(expiry);
+                const displayExpiry = formatExpiry(expiry);
                 
-                let status = 'valid';
-                if (expiry === 'lifetime') status = 'lifetime';
+                // Check if it's a duration (has m/h/d/w/M/y)
+                const isDuration = expiry && expiry.match(/^(\d+)([mhdwMy])$/);
+                const durationBadge = isDuration ? '<span class="badge">⏳ Timer</span>' : '';
                 
                 list.innerHTML += `
                     <div class="key-card">
                         <div>
                             <h4 style="display: flex; align-items: center;">
-                                <span class="status-dot dot-${status}"></span>
-                                ${key}
+                                <span class="status-dot ${statusClass}"></span>
+                                ${key} ${durationBadge}
                             </h4>
-                            <div style="color: #9ca3af; font-size: 0.8rem;">${expiry}</div>
+                            <div style="color: #9ca3af; font-size: 0.8rem;">
+                                <i class="far fa-clock"></i> ${displayExpiry}
+                            </div>
                         </div>
                         <div class="key-actions">
                             <i class="fas fa-trash" onclick="deleteKey('${key}')"></i>
@@ -570,7 +723,18 @@
                 return;
             }
             
-            const expiry = document.getElementById('modal_expiry').value || 'lifetime';
+            let expiry = document.getElementById('modal_expiry').value.trim() || 'lifetime';
+            
+            // Validate format
+            const validFormat = expiry === 'lifetime' || 
+                               expiry.match(/^\d{4}-\d{2}-\d{2}$/) ||
+                               expiry.match(/^\d+[mhdwMy]$/);
+            
+            if (!validFormat) {
+                showError("Invalid format! Use: 30m, 1h, 7d, 1M, 1y, 2025-12-31, or lifetime");
+                return;
+            }
+            
             globalData.keys[name] = expiry;
             
             closeModal('keyModal');
@@ -600,7 +764,6 @@
             }
         };
 
-        // Start
         loadData();
     </script>
 </body>
