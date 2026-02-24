@@ -3,179 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Full Time Support</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>✨ Simple Admin Panel</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
         }
-        
         body {
             background: #0a0a0f;
             color: white;
             padding: 20px;
             padding-bottom: 100px;
         }
-        
         .header {
-            background: rgba(20, 20, 30, 0.9);
-            backdrop-filter: blur(10px);
+            background: #1a1a24;
             border-radius: 20px;
             padding: 15px;
             margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
             margin-bottom: 15px;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        
-        .logo i {
-            color: #8b5cf6;
-        }
-        
-        .icon-btn {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #9ca3af;
-            cursor: pointer;
-        }
-        
         .search-box {
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: #2a2a35;
             border-radius: 30px;
-            padding: 0 15px;
+            padding: 10px 15px;
         }
-        
         .search-box input {
             background: none;
             border: none;
-            padding: 12px;
             color: white;
             width: 100%;
             outline: none;
         }
-        
         .key-card {
-            background: rgba(20, 20, 30, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
+            background: #1a1a24;
+            border-radius: 15px;
             padding: 15px;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-        }
-        
-        .dot-valid { background: #10b981; box-shadow: 0 0 10px #10b981; }
-        .dot-warning { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
-        .dot-expired { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
-        .dot-lifetime { background: #f3f4f6; box-shadow: 0 0 10px #f3f4f6; }
-        
-        .key-actions i {
-            margin-left: 15px;
-            color: #9ca3af;
-            cursor: pointer;
+        .key-name {
             font-size: 1.1rem;
+            font-weight: bold;
         }
-        
+        .key-expiry {
+            color: #9ca3af;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        .delete-btn {
+            color: #ef4444;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #1a1a24;
             display: flex;
             justify-content: space-around;
-            padding: 15px 20px;
+            padding: 15px;
         }
-        
         .nav-item {
             text-align: center;
             color: #9ca3af;
-            cursor: pointer;
         }
-        
-        .nav-item i {
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
         .nav-item.active {
             color: #8b5cf6;
         }
-        
-        .fab-stack {
+        .fab {
             position: fixed;
             bottom: 100px;
             right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .fab {
             width: 55px;
             height: 55px;
             border-radius: 18px;
             background: #8b5cf6;
             border: none;
             color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
+            font-size: 1.5rem;
             box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
         }
-        
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.9);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
         }
-        
         .modal-content {
             background: #1a1a24;
             width: 90%;
@@ -183,94 +112,46 @@
             padding: 25px;
             border-radius: 30px;
         }
-        
-        .modal-title {
-            color: #8b5cf6;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        
-        .input-group {
-            margin-bottom: 15px;
-        }
-        
-        .input-group label {
-            display: block;
-            color: #9ca3af;
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .input-group input, .input-group select {
+        .modal-content input {
             width: 100%;
             padding: 12px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
+            background: #2a2a35;
+            border: 1px solid #333;
+            border-radius: 10px;
             color: white;
+            margin: 10px 0;
         }
-        
-        .input-group select option {
-            background: #1a1a24;
-        }
-        
-        .time-presets {
+        .time-buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 5px;
+            margin: 10px 0;
         }
-        
-        .preset-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+        .time-btn {
+            background: #2a2a35;
+            border: 1px solid #333;
             border-radius: 8px;
             padding: 8px;
-            color: #9ca3af;
-            font-size: 0.8rem;
-            cursor: pointer;
-            text-align: center;
-        }
-        
-        .preset-btn:hover {
-            background: #8b5cf6;
             color: white;
+            text-align: center;
+            font-size: 0.8rem;
         }
-        
-        .btn-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
         .btn {
-            flex: 1;
             padding: 12px;
-            border-radius: 12px;
+            border-radius: 10px;
             border: none;
-            font-weight: 600;
+            font-weight: bold;
+            margin: 5px;
             cursor: pointer;
         }
-        
         .btn-primary {
             background: #8b5cf6;
             color: white;
         }
-        
         .btn-secondary {
             background: #2a2a35;
             color: white;
         }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
         .loader {
             position: fixed;
             top: 0;
@@ -283,487 +164,214 @@
             justify-content: center;
             z-index: 2000;
         }
-        
-        .success-message {
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             background: #10b981;
             color: white;
             padding: 10px;
             border-radius: 10px;
-            margin-bottom: 10px;
             display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
             z-index: 3000;
-        }
-        
-        .error-message {
-            background: #ef4444;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 3000;
-        }
-        
-        .info-text {
-            color: #9ca3af;
-            font-size: 0.7rem;
-            margin-top: 5px;
-        }
-        
-        .badge {
-            background: rgba(139, 92, 246, 0.2);
-            color: #8b5cf6;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.6rem;
-            margin-left: 8px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <div class="header">
-        <div class="header-top">
-            <div class="logo">
-                <i class="fas fa-shield-halved"></i>
-                <span>KeyMaster Pro</span>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <div class="icon-btn" onclick="loadData()">
-                    <i class="fas fa-sync-alt"></i>
-                </div>
-            </div>
-        </div>
-        
+        <div class="logo">🔑 KeyMaster</div>
         <div class="search-box">
-            <i class="fas fa-search" style="color: #9ca3af;"></i>
             <input type="text" id="searchInput" placeholder="Search keys..." onkeyup="renderKeys()">
         </div>
     </div>
 
-    <div id="tabKeys" class="tab-content active">
-        <div id="keysList"></div>
-    </div>
+    <!-- Keys List -->
+    <div id="keysList"></div>
 
-    <div id="tabConfig" class="tab-content">
-        <div style="background: rgba(20,20,30,0.7); border-radius: 20px; padding: 20px;">
-            <h3 style="color: #8b5cf6; margin-bottom: 20px;">Configuration</h3>
-            <div class="input-group">
-                <label>Theme Color</label>
-                <input type="color" id="cfg_themeColor" value="#8b5cf6">
-            </div>
-            <div class="input-group">
-                <label>Country</label>
-                <input type="text" id="cfg_country" placeholder="Global">
-            </div>
-            <button class="btn btn-primary" onclick="saveAllData()" style="width: 100%;">Save Config</button>
-        </div>
-    </div>
-
+    <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('keys', this)">
-            <i class="fas fa-key"></i>
-            <span>Keys</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('config', this)">
-            <i class="fas fa-sliders-h"></i>
-            <span>Config</span>
+        <div class="nav-item active" onclick="switchTab('keys')">🔑 Keys</div>
+        <div class="nav-item" onclick="switchTab('config')">⚙️ Config</div>
+    </div>
+
+    <!-- Add Button -->
+    <button class="fab" onclick="openModal()">+</button>
+
+    <!-- Config Panel -->
+    <div id="configPanel" style="display: none;">
+        <div style="background: #1a1a24; border-radius: 20px; padding: 20px;">
+            <h3 style="color: #8b5cf6; margin-bottom: 20px;">Settings</h3>
+            <input type="color" id="themeColor" value="#8b5cf6" style="width: 100%; height: 50px;">
+            <input type="text" id="country" placeholder="Country" style="width: 100%; padding: 12px; background: #2a2a35; border: none; border-radius: 10px; color: white; margin: 10px 0;">
+            <button class="btn btn-primary" onclick="saveConfig()" style="width: 100%;">Save</button>
         </div>
     </div>
 
-    <div class="fab-stack">
-        <button class="fab" onclick="openKeyModal()">
-            <i class="fas fa-plus"></i>
-        </button>
-    </div>
-
+    <!-- Add Key Modal -->
     <div class="modal" id="keyModal">
         <div class="modal-content">
-            <div class="modal-title">Add Key</div>
-            <div class="input-group">
-                <label>Key Name</label>
-                <input type="text" id="modal_keyName" placeholder="e.g. VIP-2024">
-            </div>
+            <h3 style="color: #8b5cf6;">Add Key</h3>
+            <input type="text" id="keyName" placeholder="Key name">
+            <input type="text" id="keyExpiry" placeholder="Expiry (30m, 1h, 7d, lifetime)" value="lifetime">
             
-            <div class="input-group">
-                <label>Expiry Time</label>
-                <input type="text" id="modal_expiry" placeholder="e.g. 30m, 12h, 7d, 1M, 1y, lifetime">
+            <div class="time-buttons">
+                <div class="time-btn" onclick="setExpiry('15m')">15m</div>
+                <div class="time-btn" onclick="setExpiry('30m')">30m</div>
+                <div class="time-btn" onclick="setExpiry('1h')">1h</div>
+                <div class="time-btn" onclick="setExpiry('6h')">6h</div>
+                <div class="time-btn" onclick="setExpiry('12h')">12h</div>
+                <div class="time-btn" onclick="setExpiry('1d')">1d</div>
+                <div class="time-btn" onclick="setExpiry('7d')">7d</div>
+                <div class="time-btn" onclick="setExpiry('lifetime')">∞</div>
             </div>
-            
-            <div class="time-presets">
-                <div class="preset-btn" onclick="setExpiry('15m')">15m</div>
-                <div class="preset-btn" onclick="setExpiry('30m')">30m</div>
-                <div class="preset-btn" onclick="setExpiry('45m')">45m</div>
-                <div class="preset-btn" onclick="setExpiry('1h')">1h</div>
-                <div class="preset-btn" onclick="setExpiry('6h')">6h</div>
-                <div class="preset-btn" onclick="setExpiry('12h')">12h</div>
-                <div class="preset-btn" onclick="setExpiry('1d')">1d</div>
-                <div class="preset-btn" onclick="setExpiry('7d')">7d</div>
-                <div class="preset-btn" onclick="setExpiry('30d')">30d</div>
-                <div class="preset-btn" onclick="setExpiry('1M')">1M</div>
-                <div class="preset-btn" onclick="setExpiry('1y')">1y</div>
-                <div class="preset-btn" onclick="setExpiry('lifetime')">∞</div>
-            </div>
-            
-            <div class="info-text">
-                ⏱️ Format: 15m, 30m, 1h, 12h, 1d, 7d, 1M, 1y, 2025-12-31, lifetime
-            </div>
-            
-            <div class="btn-row">
-                <button class="btn btn-secondary" onclick="closeModal('keyModal')">Cancel</button>
-                <button class="btn btn-primary" onclick="saveKey()">Save</button>
-            </div>
+
+            <button class="btn btn-primary" onclick="saveKey()">Save</button>
+            <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
         </div>
     </div>
 
+    <!-- Loader -->
     <div class="loader" id="loader">
-        <i class="fas fa-spinner fa-spin fa-3x" style="color: #8b5cf6;"></i>
+        <div style="color: #8b5cf6;">Loading...</div>
     </div>
 
-    <div class="success-message" id="successMsg">
-        <i class="fas fa-check-circle"></i> Saved successfully!
-    </div>
-
-    <div class="error-message" id="errorMsg">
-        <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
-    </div>
+    <!-- Toast -->
+    <div class="toast" id="toast">Saved!</div>
 
     <script>
-        // ========== YOUR DETAILS - CHANGE THESE ==========
-        const PROJECT = "BitaKura/admin-panel";  // Your username/repo
-        const TOKEN = "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";  // 
-        const FILE = "data.json";
-        const BRANCH = "main";
-        const API = `https://api.github.com/repos/${PROJECT}/contents/${FILE}`;
+        // ========== YOUR JSONBIN DETAILS ==========
+        const BIN_ID = "699cef96d0ea881f40d3519e";      // Paste your Bin ID
+        const API_KEY = "$2a$10$FKN2oaOWcSU7bAQgcabKjuGUCYfUXXxv7uOX9sXbP0WxbTAez9A16";    // Paste your Secret Key
+        const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
         let globalData = { keys: {}, config: {} };
-        let editingKey = null;
+        let currentTab = 'keys';
 
-        function showError(msg) {
-            document.getElementById('errorText').innerText = msg;
-            document.getElementById('errorMsg').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('errorMsg').style.display = 'none';
-            }, 3000);
-        }
-
-        function showSuccess() {
-            document.getElementById('successMsg').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('successMsg').style.display = 'none';
-            }, 2000);
-        }
-
-        function setExpiry(value) {
-            document.getElementById('modal_expiry').value = value;
-        }
-
-        // Function to check if a key is expired
-        function isKeyExpired(expiry) {
-            if (!expiry) return false;
-            if (expiry === 'lifetime') return false;
-            
-            // Check if it's a date (YYYY-MM-DD)
-            if (expiry.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                const expiryDate = new Date(expiry);
-                const today = new Date();
-                return expiryDate < today;
-            }
-            
-            // Check if it's duration (30m, 1h, 7d, etc)
-            const match = expiry.match(/^(\d+)([mhdwMy])$/);
-            if (match) {
-                const value = parseInt(match[1]);
-                const unit = match[2];
-                
-                // For duration keys, we don't know when they started
-                // So we consider them valid (they expire after activation)
-                return false;
-            }
-            
-            return false;
-        }
-
-        // Function to get status dot class
-        function getStatusClass(expiry) {
-            if (!expiry) return 'dot-valid';
-            if (expiry === 'lifetime') return 'dot-lifetime';
-            
-            // Check if it's a date
-            if (expiry.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                const expiryDate = new Date(expiry);
-                const today = new Date();
-                const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
-                
-                if (expiryDate < today) return 'dot-expired';
-                if (diffDays <= 3) return 'dot-warning';
-                return 'dot-valid';
-            }
-            
-            // Duration keys (30m, 1h, 7d, etc) - always show as valid
-            return 'dot-valid';
-        }
-
-        // Function to format expiry display
-        function formatExpiry(expiry) {
-            if (!expiry) return 'No expiry';
-            if (expiry === 'lifetime') return 'Lifetime';
-            
-            // If it's a date, show remaining time
-            if (expiry.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                const expiryDate = new Date(expiry);
-                const today = new Date();
-                const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
-                
-                if (expiryDate < today) return `${expiry} (Expired)`;
-                if (diffDays === 0) return `${expiry} (Today)`;
-                if (diffDays === 1) return `${expiry} (Tomorrow)`;
-                return `${expiry} (${diffDays} days left)`;
-            }
-            
-            // Duration format - add badge
-            const match = expiry.match(/^(\d+)([mhdwMy])$/);
-            if (match) {
-                const value = match[1];
-                const unit = match[2];
-                let unitName = '';
-                
-                switch(unit) {
-                    case 'm': unitName = 'minute'; break;
-                    case 'h': unitName = 'hour'; break;
-                    case 'd': unitName = 'day'; break;
-                    case 'w': unitName = 'week'; break;
-                    case 'M': unitName = 'month'; break;
-                    case 'y': unitName = 'year'; break;
-                }
-                
-                return `${value} ${unitName}${value > 1 ? 's' : ''}`;
-            }
-            
-            return expiry;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            toast.innerText = msg;
+            setTimeout(() => toast.style.display = 'none', 2000);
         }
 
         async function loadData() {
             document.getElementById('loader').style.display = 'flex';
             try {
-                const response = await fetch(`${API}?ref=${BRANCH}`, {
-                    headers: { "Authorization": `token ${TOKEN}` }
+                const response = await fetch(API_URL, {
+                    headers: {
+                        'X-Master-Key': API_KEY
+                    }
                 });
-                
-                if (response.status === 404) {
-                    globalData = { 
-                        keys: {}, 
-                        config: { 
-                            themeColor: "#8b5cf6", 
-                            country: "Global" 
-                        } 
-                    };
-                    renderAll();
-                    document.getElementById('loader').style.display = 'none';
-                    return;
-                }
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
                 const data = await response.json();
-                
-                if (!data.content) {
-                    throw new Error("No content in response");
-                }
-                
-                let decoded;
-                try {
-                    decoded = atob(data.content.replace(/\n/g, ''));
-                } catch (e) {
-                    globalData = { keys: {}, config: { themeColor: "#8b5cf6", country: "Global" } };
-                    renderAll();
-                    document.getElementById('loader').style.display = 'none';
-                    return;
-                }
-                
-                try {
-                    globalData = JSON.parse(decoded);
-                } catch (e) {
-                    globalData = { keys: {}, config: { themeColor: "#8b5cf6", country: "Global" } };
-                }
-                
-                renderAll();
-            } catch (error) {
-                console.error("Load error:", error);
+                globalData = data.record;
+                renderKeys();
+            } catch (e) {
+                console.log("New bin, starting fresh");
                 globalData = { keys: {}, config: { themeColor: "#8b5cf6", country: "Global" } };
-                renderAll();
-            } finally {
-                document.getElementById('loader').style.display = 'none';
             }
+            document.getElementById('loader').style.display = 'none';
         }
 
-        async function saveAllData() {
-            globalData.config.themeColor = document.getElementById('cfg_themeColor').value;
-            globalData.config.country = document.getElementById('cfg_country').value;
-
+        async function saveData() {
             document.getElementById('loader').style.display = 'flex';
-            
             try {
-                let sha = null;
-                try {
-                    const checkResponse = await fetch(`${API}?ref=${BRANCH}`, {
-                        headers: { "Authorization": `token ${TOKEN}` }
-                    });
-                    if (checkResponse.ok) {
-                        const data = await checkResponse.json();
-                        sha = data.sha;
-                    }
-                } catch (e) {}
-
-                const jsonString = JSON.stringify(globalData, null, 2);
-                const content = btoa(unescape(encodeURIComponent(jsonString)));
-                
-                const body = {
-                    message: "Update from admin panel",
-                    content: content,
-                    branch: BRANCH
-                };
-                
-                if (sha) {
-                    body.sha = sha;
-                }
-
-                const response = await fetch(API, {
+                await fetch(API_URL, {
                     method: 'PUT',
                     headers: {
-                        "Authorization": `token ${TOKEN}`,
-                        "Content-Type": "application/json"
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
                     },
-                    body: JSON.stringify(body)
+                    body: JSON.stringify(globalData)
                 });
-
-                if (response.ok) {
-                    showSuccess();
-                } else {
-                    const error = await response.json();
-                    throw new Error(error.message || "Failed to save");
-                }
-            } catch (error) {
-                showError(error.message);
-                console.error("Save error:", error);
-            } finally {
-                document.getElementById('loader').style.display = 'none';
+                showToast('Saved!');
+            } catch (e) {
+                alert('Error saving: ' + e.message);
             }
+            document.getElementById('loader').style.display = 'none';
         }
 
         function renderKeys() {
             const list = document.getElementById('keysList');
-            list.innerHTML = '';
+            if (!list) return;
             
-            let keys = Object.keys(globalData.keys);
+            let html = '';
+            const keys = Object.keys(globalData.keys);
             const search = document.getElementById('searchInput').value.toLowerCase();
-            keys = keys.filter(k => k.toLowerCase().includes(search));
-
-            if (keys.length === 0) {
-                list.innerHTML = '<div style="text-align: center; padding: 20px; color: #9ca3af;">No keys found. Click + to add!</div>';
-                return;
-            }
-
-            keys.forEach(key => {
+            
+            keys.filter(k => k.toLowerCase().includes(search)).forEach(key => {
                 const expiry = globalData.keys[key];
-                const statusClass = getStatusClass(expiry);
-                const displayExpiry = formatExpiry(expiry);
-                
-                // Check if it's a duration (has m/h/d/w/M/y)
-                const isDuration = expiry && expiry.match(/^(\d+)([mhdwMy])$/);
-                const durationBadge = isDuration ? '<span class="badge">⏳ Timer</span>' : '';
-                
-                list.innerHTML += `
+                html += `
                     <div class="key-card">
                         <div>
-                            <h4 style="display: flex; align-items: center;">
-                                <span class="status-dot ${statusClass}"></span>
-                                ${key} ${durationBadge}
-                            </h4>
-                            <div style="color: #9ca3af; font-size: 0.8rem;">
-                                <i class="far fa-clock"></i> ${displayExpiry}
-                            </div>
+                            <div class="key-name">${key}</div>
+                            <div class="key-expiry">⏱️ ${expiry}</div>
                         </div>
-                        <div class="key-actions">
-                            <i class="fas fa-trash" onclick="deleteKey('${key}')"></i>
-                        </div>
+                        <div class="delete-btn" onclick="deleteKey('${key}')">🗑️</div>
                     </div>
                 `;
             });
+            
+            list.innerHTML = html || '<div style="text-align: center; color: #666; padding: 20px;">No keys yet</div>';
         }
 
-        function renderAll() {
-            renderKeys();
-            document.getElementById('cfg_themeColor').value = globalData.config.themeColor || "#8b5cf6";
-            document.getElementById('cfg_country').value = globalData.config.country || "";
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('keysList').style.display = tab === 'keys' ? 'block' : 'none';
+            document.getElementById('configPanel').style.display = tab === 'config' ? 'block' : 'none';
+            
+            if (tab === 'config') {
+                document.getElementById('themeColor').value = globalData.config.themeColor || '#8b5cf6';
+                document.getElementById('country').value = globalData.config.country || '';
+            }
         }
 
-        function openKeyModal() {
+        function openModal() {
             document.getElementById('keyModal').style.display = 'flex';
-            document.getElementById('modal_keyName').value = '';
-            document.getElementById('modal_expiry').value = 'lifetime';
         }
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
+        function closeModal() {
+            document.getElementById('keyModal').style.display = 'none';
+        }
+
+        function setExpiry(value) {
+            document.getElementById('keyExpiry').value = value;
         }
 
         function saveKey() {
-            const name = document.getElementById('modal_keyName').value.trim();
+            const name = document.getElementById('keyName').value.trim();
+            const expiry = document.getElementById('keyExpiry').value.trim() || 'lifetime';
+            
             if (!name) {
-                showError("Key name required");
-                return;
-            }
-            
-            let expiry = document.getElementById('modal_expiry').value.trim() || 'lifetime';
-            
-            // Validate format
-            const validFormat = expiry === 'lifetime' || 
-                               expiry.match(/^\d{4}-\d{2}-\d{2}$/) ||
-                               expiry.match(/^\d+[mhdwMy]$/);
-            
-            if (!validFormat) {
-                showError("Invalid format! Use: 30m, 1h, 7d, 1M, 1y, 2025-12-31, or lifetime");
+                alert('Enter key name');
                 return;
             }
             
             globalData.keys[name] = expiry;
-            
-            closeModal('keyModal');
+            closeModal();
             renderKeys();
-            saveAllData();
+            saveData();
+            
+            document.getElementById('keyName').value = '';
+            document.getElementById('keyExpiry').value = 'lifetime';
         }
 
         function deleteKey(key) {
-            if (confirm(`Delete ${key}?`)) {
+            if (confirm('Delete ' + key + '?')) {
                 delete globalData.keys[key];
                 renderKeys();
-                saveAllData();
+                saveData();
             }
         }
 
-        function switchTab(tab, element) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
-            
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            element.classList.add('active');
+        function saveConfig() {
+            globalData.config.themeColor = document.getElementById('themeColor').value;
+            globalData.config.country = document.getElementById('country').value;
+            saveData();
         }
 
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        };
-
+        // Load data on start
         loadData();
     </script>
 </body>
