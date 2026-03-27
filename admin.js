@@ -1,5 +1,5 @@
 // GitHub Configuration
-const GITHUB_TOKEN = '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';
+const GITHUB_TOKEN = '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';
 const GITHUB_OWNER = 'BitaKura';
 const GITHUB_REPO = 'admin-panel';
 const BRANCH = 'main';
