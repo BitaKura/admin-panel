@@ -16,7 +16,7 @@
     "max_uses": 1,
     "hwid": "",
     "hwid_bound": false,
-    "active": true,
+    "active": false,
     "notes": "Generated for KURA on 2026-07-29 18:14:17"
   }
 }
