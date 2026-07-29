@@ -9,16 +9,5 @@
     "hwid_bound": true,
     "active": true,
     "notes": "Generated for BITA on 2026-07-30 03:33:28"
-  },
-  "C7B1-7A12-65A2-0CA9-FF30-D9B2": {
-    "user": "VIP",
-    "created": "2026-07-30T04:51:55.827179",
-    "expires": "2026-08-29T04:51:55.827293",
-    "uses": 1,
-    "max_uses": 5,
-    "hwid": "b98f07a4a607daae2e13d08ac56a1263",
-    "hwid_bound": true,
-    "active": true,
-    "notes": "Generated for VIP on 2026-07-30 04:51:55"
   }
 }
