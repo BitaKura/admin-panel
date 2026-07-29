@@ -7,16 +7,5 @@
     "max_uses": 999,
     "hwid": "",
     "notes": "Generated for MyUser on 2026-07-29"
-  },
-  "04A3-CDFF-DFF8-D140-7D38-4B39-EF0F-662D": {
-    "user": "KURA",
-    "created": "2026-07-29T18:14:17.240987",
-    "expires": "2026-07-31T18:14:17.241073",
-    "uses": 0,
-    "max_uses": 1,
-    "hwid": "",
-    "hwid_bound": false,
-    "active": false,
-    "notes": "Generated for KURA on 2026-07-29 18:14:17"
   }
 }
