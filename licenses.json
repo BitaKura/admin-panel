@@ -3,10 +3,10 @@
     "user": "BITA",
     "created": "2026-07-30T03:33:28.729681",
     "expires": "2026-09-13T03:33:28.729760",
-    "uses": 0,
+    "uses": 1,
     "max_uses": 1,
-    "hwid": "",
-    "hwid_bound": false,
+    "hwid": "b98f07a4a607daae2e13d08ac56a1263",
+    "hwid_bound": true,
     "active": true,
     "notes": "Generated for BITA on 2026-07-30 03:33:28"
   }
