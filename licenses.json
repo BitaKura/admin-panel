@@ -1,13 +1,1 @@
-{
-  "BF30-3FB1-0AE1-56A7-3F64-E7FF": {
-    "user": "BITA",
-    "created": "2026-07-30T03:33:28.729681",
-    "expires": "2026-09-13T03:33:28.729760",
-    "uses": 1,
-    "max_uses": 1,
-    "hwid": "false",
-    "hwid_bound": true,
-    "active": true,
-    "notes": "Generated for BITA on 2026-07-30 03:33:28"
-  }
-}
+{}
