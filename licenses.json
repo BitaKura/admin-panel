@@ -1,9 +1,1 @@
-{
-  "LICENSE-KEY-12345": {
-    "user": "John Doe",
-    "expires": "2026-12-31",
-    "hwid": "b98f07a4a607daae2e13d08ac56a1263",
-    "max_uses": 999,
-    "uses": 0
-  }
-}
+{}
