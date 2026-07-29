@@ -1,1 +1,13 @@
-{}
+{
+  "A1B2-C3D4-E5F6-G7H8": {
+    "user": "JohnDoe",
+    "created": "2026-07-29T10:00:00",
+    "expires": "2026-10-27T10:00:00",
+    "uses": 0,
+    "max_uses": 1,
+    "hwid": "",
+    "hwid_bound": false,
+    "active": true,
+    "notes": "Generated for JohnDoe on 2026-07-29 10:00:00"
+  }
+}
