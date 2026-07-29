@@ -9,5 +9,16 @@
     "hwid_bound": false,
     "active": true,
     "notes": "Generated for JohnDoe on 2026-07-29 10:00:00"
+  },
+  "8C6B-EC19-5D9C-7717-E340-262B-C21D-407B": {
+    "user": "VIP",
+    "created": "2026-07-29T18:55:47.882215",
+    "expires": "2026-09-27T18:55:47.883215",
+    "uses": 0,
+    "max_uses": 1,
+    "hwid": "",
+    "hwid_bound": false,
+    "active": true,
+    "notes": "Generated for VIP on 2026-07-29 18:55:47"
   }
 }
