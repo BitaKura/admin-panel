@@ -1,1 +1,13 @@
-{}
+{
+  "C740-C565-778E-DA0F-6B1C-0FE5": {
+    "user": "BITA",
+    "created": "2026-07-30T07:08:59.857906",
+    "expires": "2026-09-28T07:08:59.858018",
+    "uses": 0,
+    "max_uses": 100,
+    "hwid": "",
+    "hwid_bound": false,
+    "active": true,
+    "notes": "Generated for BITA on 2026-07-30 07:08:59"
+  }
+}
