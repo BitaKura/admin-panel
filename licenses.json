@@ -25,9 +25,9 @@
     "user": "BITA",
     "created": "2026-08-01T10:45:48.314890",
     "expires": "2026-09-30T10:45:48.314957",
-    "uses": 1,
+    "uses": 2,
     "max_uses": 500,
-    "hwid": "b98f07a4a607daae2e13d08ac56a1263",
+    "hwid": "b98f07a4a607daae2e13d08ac56a1263, 0413a8e6a79fe540e2ab61999be07881",
     "hwid_bound": true,
     "active": true,
     "notes": "Generated for BITA on 2026-08-01 10:45:48"
